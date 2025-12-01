@@ -1,4 +1,4 @@
--- address TABLE: 30 records
+-- address TABLE: 32 records
 INSERT INTO address (created_at, updated_at, line, province_id, district_id, ward_id)
 VALUES ('2021-09-29 21:58:33', '2021-07-30 14:27:56', '140 Commercial Way', 7, 28, 1);
 INSERT INTO address (created_at, updated_at, line, province_id, district_id, ward_id)
@@ -59,14 +59,18 @@ INSERT INTO address (created_at, updated_at, line, province_id, district_id)
 VALUES ('2022-01-28 17:13:08', '2022-01-28 19:16:21', '1706 Carberry Lane', 2, 10);
 INSERT INTO address (created_at, updated_at, line, province_id, district_id)
 VALUES ('2021-10-06 19:21:11', '2022-05-03 08:50:28', '02 Moland Court', 9, 10);
+INSERT INTO address (created_at, updated_at, line, province_id, district_id, ward_id)
+VALUES ('2025-10-05 07:30:07', '2025-10-05 07:30:07', '123 Le Loi Street', 1, 1, 1);
+INSERT INTO address (created_at, updated_at, line, province_id, district_id, ward_id)
+VALUES ('2025-10-05 07:30:07', '2025-10-05 07:30:07', '456 Nguyen Hue Street', 1, 1, 2);
 
 -- user TABLE: 20 records
 INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
 VALUES ('2025-10-05 07:30:07', '2025-06-03 16:38:23', 'hoangtien2k3-admin', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Hoang Anh Tien', 'hoangtien2k3qx1@gmail.com', '0828007853', 'M', 1, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
 INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2025-10-05 07:30:07', '2025-06-03 16:38:23', 'hoangtien2k3-employee', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Hoang Anh Tien', 'hoangtien2k3qx1@gmail.com', '0828007853', 'M', 1, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
+VALUES ('2025-10-05 07:30:07', '2025-06-03 16:38:23', 'hoangtien2k3-employee', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Hoang Anh Tien - Employee', 'hoangtien2k3.employee@gmail.com', '0828007854', 'M', 31, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
 INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
-VALUES ('2025-10-05 07:30:07', '2025-06-03 16:38:23', 'hoangtien2k3-customer', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Hoang Anh Tien', 'hoangtien2k3qx1@gmail.com', '0828007853', 'M', 1, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
+VALUES ('2025-10-05 07:30:07', '2025-06-03 16:38:23', 'hoangtien2k3-customer', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Hoang Anh Tien - Customer', 'hoangtien2k3.customer@gmail.com', '0828007855', 'M', 32, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
 INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
 VALUES ('2025-01-07 17:51:29', '2025-02-24 10:37:18', 'doxuantruong', '$2a$12$QfHFHrPWrhUjYUUjSSMT4usJD9.eSijAKmmFdlgKfwsMZHkYs0ciC', 'Do Xuan Truong', 'doxuantruong@google.com', '0919944709', 'F', 2, 'https://avatars.githubusercontent.com/u/122768076?s=200&v=4', 1);
 INSERT INTO user (created_at, updated_at, username, password, fullname, email, phone, gender, address_id, avatar, status)
