@@ -75,7 +75,7 @@ function ClientFooter() {
               </Group>
               <Stack spacing={theme.spacing.xs / 2}>
                 <Text weight={500}>Địa chỉ liên hệ</Text>
-                <Text>Tòa nhà Bitexco, Quận 1, Thành phố Hồ Chí Minh</Text>
+                <Text>Số 18 Phố Viên, P.Đức Thắng, Q.Bắc Từ Liêm, TP.Hà Nội</Text>
               </Stack>
               <Group spacing="sm">
                 <ActionIcon color="blue" size="xl" radius="xl" variant="light">
@@ -154,7 +154,7 @@ function ClientFooter() {
         </Grid>
         <Group className={classes.afterFooter} position="apart">
           <Text color="dimmed" size="sm">
-            © 2022 Electro Corporation. Bảo lưu mọi quyền.
+            © 2025 Electro Corporation. Đỗ Xuân Trường.
           </Text>
           <Group spacing="xs">
             <ThemeIcon variant="outline" color="gray" sx={{ width: 50, height: 30 }}>
