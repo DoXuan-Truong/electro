@@ -4,7 +4,8 @@
 > 2. https://github.com/hoangtien2k3/electro.git
 > 3. cd electro
 > 4. **`sh start-project.sh`** hoặc **`./start-project.sh`**
-> 5. Mở trình duyệt và truy cập http://localhost:3000 để sử dụng hệ thống
+> 5. Lần đầu tiên sẽ build hơi lâu, ae đợi khi nào có dòng chữ **`DỰ ÁN ĐÃ KHỞI ĐỘNG THÀNH CÔNG`**
+> 6. Mở trình duyệt và truy cập http://localhost:3000 để sử dụng hệ thống
 
 # Thiết kế hệ thống
 
