@@ -31,7 +31,7 @@ services:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 12345
     ports:
-      - 8085:8085
+      - "8085:8085"
     networks:
       - network
     healthcheck:

@@ -1,10 +1,10 @@
-> Cân nhắc! Project này có sử dụng một số kỹ thuật mang tính hacking như lớp GenericMappingRegister vì yêu cầu tiến độ, do đó chỉ nên tham khảo, không nên áp dụng trong thực tế. Ngoài ra, còn một số vấn đề chưa giải quyết như việc một số controller có inject repository, hướng dẫn cài đặt, và nhiều lỗi khác.
-
-# Giới thiệu
-
-Công ty Electro là doanh nghiệp kinh doanh thiết bị điện tử. Hiện nay, công ty có nhu cầu mở rộng kênh bán hàng, hướng đến triển khai một website thương mại điện tử cho riêng công ty.
-
-Nhằm đáp ứng nhu cầu của quý công ty, dự án Electro ra đời để xây dựng một website thương mại điện tử như ý định của quý công ty.
+# Chạy project
+> Chạy project rất rất đơn giản:
+> 1. Cài đặt Docker và Docker Compose
+> 2. https://github.com/hoangtien2k3/electro.git
+> 3. cd electro
+> 4. **`sh start-project.sh`** hoặc **`./start-project.sh`**
+> 5. Mở trình duyệt và truy cập http://localhost:3000 để sử dụng hệ thống
 
 # Thiết kế hệ thống
 
