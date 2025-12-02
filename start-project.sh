@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # ============================================================
-# Electro Project Startup Script
-# ============================================================
 # Script để khởi động dự án Electro với Docker
-# Bao gồm: MySQL Database, Spring Boot Backend, React Frontend
+# Bao gồm: MySQL-Database, SpringBoot-Backend, React-Frontend
 # ============================================================
 
 RED='\033[0;31m'
@@ -27,14 +25,6 @@ print_warning() {
 
 print_error() {
     echo "${RED}❌ $1${NC}"
-}
-
-print_header() {
-    echo "${BLUE}"
-    echo "============================================"
-    echo "  🚀 ELECTRO PROJECT STARTUP SCRIPT"
-    echo "============================================"
-    echo "${NC}"
 }
 
 check_docker() {
@@ -61,25 +51,19 @@ check_docker_compose() {
 }
 
 start_docker_compose() {
-    print_header
     echo "Chọn chế độ khởi động:"
-    echo "  1) Khởi động nhanh (không build lại)"
-    echo "  2) Build và khởi động (khuyến nghị khi có thay đổi code)"
-    echo "  3) Build lại hoàn toàn và khởi động"
+    echo " 1) Build và khởi động (khi có thay đổi code)"
+    echo " 2) Build lại hoàn toàn và khởi động"
     echo ""
     # shellcheck disable=SC2162
-    read -p "Lựa chọn của bạn (1/2/3): " choice
-    
+    read -p "=====> Lựa chọn của bạn (1 | 2): " choice
+    echo ""
     case $choice in
         1)
-            print_info "Khởi động nhanh..."
-            docker compose up -d
-            ;;
-        2)
             print_info "Build và khởi động..."
             docker compose up -d --build
             ;;
-        3)
+        2)
             print_info "Build lại hoàn toàn..."
             docker compose down -v
             docker compose build --no-cache
