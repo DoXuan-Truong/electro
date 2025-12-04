@@ -25,9 +25,7 @@ public interface SecurityConstants {
 
     interface Role {
         String ADMIN = "ADMIN";
-
         String EMPLOYEE = "EMPLOYEE";
-
         String CUSTOMER = "CUSTOMER";
     }
 }
