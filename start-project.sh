@@ -51,29 +51,8 @@ check_docker_compose() {
 }
 
 start_docker_compose() {
-    echo "Chọn chế độ khởi động:"
-    echo " 1) Build và khởi động (khi có thay đổi code)"
-    echo " 2) Build lại hoàn toàn và khởi động"
-    echo ""
-    # shellcheck disable=SC2162
-    read -p "=====> Lựa chọn của bạn (1 | 2): " choice
-    echo ""
-    case $choice in
-        1)
-            print_info "Build và khởi động..."
-            docker compose up -d --build
-            ;;
-        2)
-            print_info "Build lại hoàn toàn..."
-            docker compose down -v
-            docker compose build --no-cache
-            docker compose up -d
-            ;;
-        *)
-            print_warning "Lựa chọn không hợp lệ, sử dụng chế độ mặc định (build và khởi động)"
-            docker compose up -d --build
-            ;;
-    esac
+    print_info "Build và khởi động..."
+    docker compose up -d --build
 }
 
 show_status() {

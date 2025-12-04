@@ -1,11 +1,12 @@
 # Chạy project
-> Chạy project rất rất đơn giản:
+> Chạy project rất rất đơn giản, làm theo các bước sau:
 > 1. Cài đặt Docker Desktop và mở nó lên
 > 2. Mở termimal và chạy lệnh: **git clone https://github.com/hoangtien2k3/electro.git**
-> 3. cd electro
-> 4. **`sh start-project.sh`** hoặc **`./start-project.sh`**
+> 3. Đi vào thư mục dự án: `cd electro`
+> 4. Khởi động tất cả bằng script: **`sh start-project.sh`** hoặc **`./start-project.sh`**
 > 5. Lần đầu tiên sẽ build hơi lâu, ae đợi khi nào có dòng chữ **`DỰ ÁN ĐÃ KHỞI ĐỘNG THÀNH CÔNG`**
-> 6. Mở trình duyệt và truy cập http://localhost:3000
+> 6. Mở trình duyệt và truy cập http://localhost:3000 để vào trang khách hàng (Demo: `user`: `hoangtien2k3-customer`, `pass`: `123456789`)
+> 7. Mở trình duyệt và truy cập http://localhost:3000/admin để vào trang quản trị (Demo: `user`: `hoangtien2k3-admin`, `pass`: `123456789`)
 
 # Thiết kế hệ thống
 
