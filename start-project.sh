@@ -89,8 +89,8 @@ show_access_info() {
     echo "${GREEN}============================================${NC}"
     echo ""
     echo "${BLUE}📱 Truy cập ứng dụng:${NC}"
-    echo "🌐 Frontend:  ${GREEN}http://localhost:3000${NC}"
-    echo "🚀 Backend :  ${GREEN}http://localhost:8085${NC}"
+    echo "🌐 Frontend Admin:    ${GREEN}http://localhost:3000/admin${NC}"
+    echo "🌐 Frontend Customer: ${GREEN}http://localhost:3000${NC}"
     echo "${GREEN}============================================${NC}"
 }
 
