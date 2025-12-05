@@ -70,7 +70,7 @@ function ClientFooter() {
                 <Headset size={52} color={theme.colors[theme.primaryColor][6]} strokeWidth={1.25}/>
                 <Stack spacing={theme.spacing.xs / 4}>
                   <Text size="sm" color="dimmed">Tổng đài hỗ trợ</Text>
-                  <Text size="xl">(024) 3535 7272, (028) 35 111 222</Text>
+                  <Text size="xl">(082) 2234 810</Text>
                 </Stack>
               </Group>
               <Stack spacing={theme.spacing.xs / 2}>
