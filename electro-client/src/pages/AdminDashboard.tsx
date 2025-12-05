@@ -11,7 +11,7 @@ import {
   Truck,
   Users
 } from 'tabler-icons-react';
-import { Bar, BarChart, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useQuery } from 'react-query';
 import FetchUtils, { ErrorMessage } from 'utils/FetchUtils';
 import ResourceURL from 'constants/ResourceURL';
@@ -39,19 +39,19 @@ function AdminDashboard() {
           <Text size="lg" weight={500} color="dimmed">Tổng quan</Text>
           <Grid>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số khách hàng" number={statistic.totalCustomer} color="blue" icon={Users}/>
+              <OverviewCard title="Tổng số khách hàng" number={statistic.totalCustomer} color="blue" icon={Users} />
             </Grid.Col>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số sản phẩm" number={statistic.totalProduct} color="orange" icon={Box}/>
+              <OverviewCard title="Tổng số sản phẩm" number={statistic.totalProduct} color="orange" icon={Box} />
             </Grid.Col>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số đơn hàng" number={statistic.totalOrder} color="teal" icon={FileBarcode}/>
+              <OverviewCard title="Tổng số đơn hàng" number={statistic.totalOrder} color="teal" icon={FileBarcode} />
             </Grid.Col>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số vận đơn" number={statistic.totalWaybill} color="grape" icon={Truck}/>
+              <OverviewCard title="Tổng số vận đơn" number={statistic.totalWaybill} color="grape" icon={Truck} />
             </Grid.Col>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số đánh giá" number={statistic.totalReview} color="yellow" icon={Star}/>
+              <OverviewCard title="Tổng số đánh giá" number={statistic.totalReview} color="yellow" icon={Star} />
             </Grid.Col>
             <Grid.Col span={3}>
               <OverviewCard
@@ -70,7 +70,7 @@ function AdminDashboard() {
               />
             </Grid.Col>
             <Grid.Col span={3}>
-              <OverviewCard title="Tổng số thương hiệu" number={statistic.totalBrand} color="indigo" icon={BrandApple}/>
+              <OverviewCard title="Tổng số thương hiệu" number={statistic.totalBrand} color="indigo" icon={BrandApple} />
             </Grid.Col>
           </Grid>
         </Stack>
@@ -86,22 +86,22 @@ function AdminDashboard() {
                   <Text size="sm" color="dimmed">7 ngày gần nhất</Text>
                 </Group>
 
-                <LineChart
-                  width={650}
-                  height={275}
-                  data={dateReducerForStatisticResources(statistic.statisticRegistration)}
-                  margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
-                >
-                  <XAxis dataKey="date"/>
-                  <YAxis/>
-                  <Tooltip/>
-                  <Line
-                    name="Số lượt đăng ký"
-                    type="monotone"
-                    dataKey="total"
-                    stroke={theme.colors.blue[5]}
-                  />
-                </LineChart>
+                <ResponsiveContainer width="100%" height={275}>
+                  <LineChart
+                    data={dateReducerForStatisticResources(statistic.statisticRegistration)}
+                    margin={{ top: 10, right: 20, bottom: 0, left: 0 }}
+                  >
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line
+                      name="Số lượt đăng ký"
+                      type="monotone"
+                      dataKey="total"
+                      stroke={theme.colors.blue[5]}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
               </Stack>
             </Paper>
 
@@ -112,22 +112,22 @@ function AdminDashboard() {
                   <Text size="sm" color="dimmed">7 ngày gần nhất</Text>
                 </Group>
 
-                <LineChart
-                  width={650}
-                  height={275}
-                  data={dateReducerForStatisticResources(statistic.statisticReview)}
-                  margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
-                >
-                  <XAxis dataKey="date"/>
-                  <YAxis/>
-                  <Tooltip/>
-                  <Line
-                    name="Số lượt đánh giá"
-                    type="monotone"
-                    dataKey="total"
-                    stroke={theme.colors.yellow[7]}
-                  />
-                </LineChart>
+                <ResponsiveContainer width="100%" height={275}>
+                  <LineChart
+                    data={dateReducerForStatisticResources(statistic.statisticReview)}
+                    margin={{ top: 10, right: 20, bottom: 0, left: 0 }}
+                  >
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Line
+                      name="Số lượt đánh giá"
+                      type="monotone"
+                      dataKey="total"
+                      stroke={theme.colors.yellow[7]}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
               </Stack>
             </Paper>
           </Stack>
@@ -141,21 +141,21 @@ function AdminDashboard() {
                   <Text size="sm" color="dimmed">7 ngày gần nhất</Text>
                 </Group>
 
-                <BarChart
-                  width={650}
-                  height={275}
-                  data={dateReducerForStatisticResources(statistic.statisticOrder)}
-                  margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
-                >
-                  <XAxis dataKey="date"/>
-                  <YAxis/>
-                  <Tooltip/>
-                  <Bar
-                    name="Số lượt đặt hàng"
-                    dataKey="total"
-                    fill={theme.colors.teal[5]}
-                  />
-                </BarChart>
+                <ResponsiveContainer width="100%" height={275}>
+                  <BarChart
+                    data={dateReducerForStatisticResources(statistic.statisticOrder)}
+                    margin={{ top: 10, right: 20, bottom: 0, left: 0 }}
+                  >
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar
+                      name="Số lượt đặt hàng"
+                      dataKey="total"
+                      fill={theme.colors.teal[5]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
               </Stack>
             </Paper>
 
@@ -166,21 +166,21 @@ function AdminDashboard() {
                   <Text size="sm" color="dimmed">7 ngày gần nhất</Text>
                 </Group>
 
-                <BarChart
-                  width={650}
-                  height={275}
-                  data={dateReducerForStatisticResources(statistic.statisticWaybill)}
-                  margin={{ top: 10, right: 5, bottom: 0, left: -10 }}
-                >
-                  <XAxis dataKey="date"/>
-                  <YAxis/>
-                  <Tooltip/>
-                  <Bar
-                    name="Số lượt tạo vận đơn"
-                    dataKey="total"
-                    fill={theme.colors.grape[5]}
-                  />
-                </BarChart>
+                <ResponsiveContainer width="100%" height={275}>
+                  <BarChart
+                    data={dateReducerForStatisticResources(statistic.statisticWaybill)}
+                    margin={{ top: 10, right: 20, bottom: 0, left: 0 }}
+                  >
+                    <XAxis dataKey="date" />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar
+                      name="Số lượt tạo vận đơn"
+                      dataKey="total"
+                      fill={theme.colors.grape[5]}
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
               </Stack>
             </Paper>
           </Stack>
@@ -208,7 +208,7 @@ function OverviewCard({ title, number, color, icon }: OverviewCardProps) {
       color: theme.colorScheme === 'dark' ? theme.white : theme.black,
     }}>
       <Group>
-        <Icon size={40} strokeWidth={1.25}/>
+        <Icon size={40} strokeWidth={1.25} />
         <Stack spacing={2.5}>
           <Text>{title}</Text>
           <Text size="xl" weight={500}>{number}</Text>

@@ -8,7 +8,7 @@ interface ElectroLogoProps {
 function ElectroLogo({ width = 120 }: ElectroLogoProps) {
   const theme = useMantineTheme();
 
-  const logoSize = width * 0.50;
+  const logoSize = width * 0.40;
 
   return (
     <Group spacing={width * 0.08} align="center" noWrap>
