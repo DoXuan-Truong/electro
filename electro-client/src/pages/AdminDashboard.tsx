@@ -55,7 +55,7 @@ function AdminDashboard() {
             </Grid.Col>
             <Grid.Col span={3}>
               <OverviewCard
-                title="Tổng số khuyến mãi hiện tại"
+                title="Tổng số khuyến mãi"
                 number={statistic.totalActivePromotion}
                 color="pink"
                 icon={Percentage}
