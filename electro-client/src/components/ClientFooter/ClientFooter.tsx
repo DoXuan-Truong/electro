@@ -78,18 +78,26 @@ function ClientFooter() {
                 <Text>Số 18 Phố Viên, P.Đức Thắng, Q.Bắc Từ Liêm, TP.Hà Nội</Text>
               </Stack>
               <Group spacing="sm">
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandFacebook strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandYoutube strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandInstagram strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandTiktok strokeWidth={1.5}/>
-                </ActionIcon>
+                <a href="https://www.facebook.com/do.truong.35728" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandFacebook strokeWidth={1.5}/>
+                  </ActionIcon>
+                </a>
+                <a href="https://youtube.com/your-channel" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandYoutube strokeWidth={1.5}/>
+                  </ActionIcon>
+                </a>
+                <a href="https://instagram.com/your-ig" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandInstagram strokeWidth={1.5}/>
+                  </ActionIcon>
+                </a>
+                <a href="https://www.tiktok.com/@kudoushaki" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandTiktok strokeWidth={1.5}/>
+                  </ActionIcon>
+                </a>
               </Group>
             </Stack>
           </Grid.Col>
