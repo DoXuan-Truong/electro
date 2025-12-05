@@ -1,0 +1,97 @@
+# Server Configuration
+server:
+  port: 8085
+  error:
+    include-stacktrace: never
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# Logging Configuration
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type: TRACE
+    web: TRACE
+    org.springframework.web: TRACE
+
+# Spring Configuration
+spring:
+  # Profiles
+  profiles:
+    active: '@spring.profiles.active@'
+  
+  # Database Configuration
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 12345
+  
+  # JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+        connection:
+          CharSet: UTF-8
+          characterEncoding: UTF-8
+          useUnicode: true
+  
+  # SQL Initialization
+  sql:
+    init:
+      mode: always  # `always` or `never`
+  
+  # Servlet Multipart
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 15MB
+  
+  # Mail Configuration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: hoangtien2k3qx1@gmail.com
+    password: luzp icpx ramk fvln
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: mappings, health
+
+# Springdoc Configuration
+springdoc:
+  show-actuator: false
+
+# JWT Configuration
+electro:
+  app:
+    jwtSecret: electroSecretKey
+    jwtExpirationMs: 10080000
+    jwtRefreshExpirationMs: 86400000
+    # Shipping Configuration
+    shipping:
+      ghnToken: cee52cd3-8a9d-11ed-9ccc-a2c11deda90c
+      ghnShopId: 121327
+      ghnApiPath: https://dev-online-gateway.ghn.vn/shiip/public-api/v2
+
+# PayPal Configuration
+paypal:
+  baseUrl: https://api-m.sandbox.paypal.com
+  clientId: ATg9Fx-qiFDopw6uZVdGQN2AOgx_vr0RsDNvrN5hViup8c2BZ6WaDYQPzkZd5DZGW-PsJic3scUdwqCd
+  secret: EGOakP0-AkdLfVx6r5vP9paSUggilXd2tAiuMrpKFU_59A9jzWiGnyY_J56Jcok9KVqzHFzwahZAq5XE
