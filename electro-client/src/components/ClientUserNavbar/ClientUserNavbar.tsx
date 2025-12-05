@@ -24,7 +24,7 @@ function ClientUserNavbar() {
   return (
     <Stack spacing={5}>
       {navButton('Tài khoản', '/user', User)}
-      {navButton('Thiết đặt', '/user/setting', Settings,
+      {navButton('Thiết lập', '/user/setting', Settings,
         ['/user/setting/personal', '/user/setting/phone', '/user/setting/email', '/user/setting/password'])}
       {navButton('Thông báo', '/user/notification', Bell)}
       {navButton('Quản lý đơn hàng', '/order', FileBarcode, ['/order/detail'])}

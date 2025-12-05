@@ -193,7 +193,7 @@ function ClientHeader() {
                       Tài khoản
                     </Menu.Item>
                     <Menu.Item icon={<Settings size={14} />} component={Link} to="/user/setting">
-                      Thiết đặt
+                      Thiết lập
                     </Menu.Item>
                     <Menu.Item icon={<Star size={14} />} component={Link} to="/user/review">
                       Đánh giá sản phẩm
