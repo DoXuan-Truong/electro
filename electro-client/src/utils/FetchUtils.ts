@@ -100,8 +100,9 @@ class FetchUtils {
    * @param isAdmin
    */
   static async getWithToken<O>(resourceUrl: string, requestParams?: BasicRequestParams, isAdmin?: boolean): Promise<O> {
-    const token = JSON.parse(localStorage
-      .getItem(isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store') || '{}').state?.jwtToken;
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+    const token = authStore.state?.jwtToken;
 
     // Source: https://stackoverflow.com/a/70426220
     const response = await fetch(FetchUtils.concatParams(resourceUrl, requestParams), {
@@ -111,6 +112,14 @@ class FetchUtils {
         'Authorization': `Bearer ${token}`,
       },
     });
+
+    // If 401 Unauthorized, try to refresh token
+    if (response.status === 401) {
+      const refreshed = await FetchUtils.refreshToken(isAdmin);
+      if (refreshed) {
+        return FetchUtils.getWithToken<O>(resourceUrl, requestParams, isAdmin);
+      }
+    }
 
     if (!response.ok) {
       throw await response.json();
@@ -125,8 +134,9 @@ class FetchUtils {
    * @param isAdmin
    */
   static async postWithToken<I, O>(resourceUrl: string, requestBody: I, isAdmin?: boolean): Promise<O> {
-    const token = JSON.parse(localStorage
-      .getItem(isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store') || '{}').state?.jwtToken;
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+    const token = authStore.state?.jwtToken;
 
     const response = await fetch(resourceUrl, {
       method: 'POST',
@@ -137,6 +147,14 @@ class FetchUtils {
       },
       body: JSON.stringify(requestBody),
     });
+
+    // If 401 Unauthorized, try to refresh token
+    if (response.status === 401) {
+      const refreshed = await FetchUtils.refreshToken(isAdmin);
+      if (refreshed) {
+        return FetchUtils.postWithToken<I, O>(resourceUrl, requestBody, isAdmin);
+      }
+    }
 
     if (!response.ok) {
       throw await response.json();
@@ -151,8 +169,9 @@ class FetchUtils {
    * @param isAdmin
    */
   static async putWithToken<I, O>(resourceUrl: string, requestBody: I, isAdmin?: boolean): Promise<O> {
-    const token = JSON.parse(localStorage
-      .getItem(isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store') || '{}').state?.jwtToken;
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+    const token = authStore.state?.jwtToken;
 
     const response = await fetch(resourceUrl, {
       method: 'PUT',
@@ -163,6 +182,14 @@ class FetchUtils {
       },
       body: JSON.stringify(requestBody),
     });
+
+    // If 401 Unauthorized, try to refresh token
+    if (response.status === 401) {
+      const refreshed = await FetchUtils.refreshToken(isAdmin);
+      if (refreshed) {
+        return FetchUtils.putWithToken<I, O>(resourceUrl, requestBody, isAdmin);
+      }
+    }
 
     if (!response.ok) {
       throw await response.json();
@@ -176,9 +203,10 @@ class FetchUtils {
    * @param entityIds
    * @param isAdmin
    */
-  static async deleteWithToken<T>(resourceUrl: string, entityIds: T[], isAdmin?: boolean) {
-    const token = JSON.parse(localStorage
-      .getItem(isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store') || '{}').state?.jwtToken;
+  static async deleteWithToken<T>(resourceUrl: string, entityIds: T[], isAdmin?: boolean): Promise<void> {
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+    const token = authStore.state?.jwtToken;
 
     const response = await fetch(resourceUrl, {
       method: 'DELETE',
@@ -188,6 +216,15 @@ class FetchUtils {
       },
       body: JSON.stringify(entityIds),
     });
+
+    // If 401 Unauthorized, try to refresh token
+    if (response.status === 401) {
+      const refreshed = await FetchUtils.refreshToken(isAdmin);
+      if (refreshed) {
+        // Retry the request with new token
+        return FetchUtils.deleteWithToken<T>(resourceUrl, entityIds, isAdmin);
+      }
+    }
 
     if (!response.ok) {
       throw await response.json();
@@ -324,6 +361,70 @@ class FetchUtils {
     }
     return url;
   };
+
+  /**
+   * Hàm refreshToken dùng để làm mới access token khi hết hạn
+   * @param isAdmin
+   * @returns true nếu refresh thành công, false nếu thất bại
+   */
+  private static async refreshToken(isAdmin?: boolean): Promise<boolean> {
+    try {
+      const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+      const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+      const refreshToken = authStore.state?.refreshToken;
+
+      if (!refreshToken) {
+        FetchUtils.logout(isAdmin);
+        return false;
+      }
+
+      // Import ResourceURL dynamically to avoid circular dependency
+      const ResourceURL = (await import('constants/ResourceURL')).default;
+
+      const response = await fetch(ResourceURL.REFRESH_TOKEN, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ refreshToken }),
+      });
+
+      if (!response.ok) {
+        FetchUtils.logout(isAdmin);
+        return false;
+      }
+
+      const data = await response.json();
+
+      // Cập nhật token mới vào localStorage
+      authStore.state.jwtToken = data.jwtToken;
+      authStore.state.refreshToken = data.refreshToken;
+      localStorage.setItem(storeName, JSON.stringify(authStore));
+
+      return true;
+    } catch (error) {
+      console.error('Error refreshing token:', error);
+      FetchUtils.logout(isAdmin);
+      return false;
+    }
+  }
+
+  /**
+   * Hàm logout dùng để đăng xuất user
+   * @param isAdmin
+   */
+  private static logout(isAdmin?: boolean): void {
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    localStorage.removeItem(storeName);
+
+    // Redirect to login page
+    if (isAdmin) {
+      window.location.href = '/admin/signin';
+    } else {
+      window.location.href = '/';
+    }
+  }
 }
 
 export default FetchUtils;

@@ -105,6 +105,7 @@ class ResourceURL {
   static CLIENT_REGISTRATION_CHANGE_EMAIL = (userId: number) => apiPath + `/auth/registration/${userId}/change-email`;
   static CLIENT_FORGOT_PASSWORD = apiPath + '/auth/forgot-password';
   static CLIENT_RESET_PASSWORD = apiPath + '/auth/reset-password';
+  static REFRESH_TOKEN = apiPath + '/auth/refresh-token';
 }
 
 export default ResourceURL;
