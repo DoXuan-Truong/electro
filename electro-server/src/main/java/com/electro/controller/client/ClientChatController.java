@@ -4,6 +4,7 @@ import com.electro.constant.AppConstants;
 import com.electro.dto.chat.ClientRoomExistenceResponse;
 import com.electro.dto.chat.RoomResponse;
 import com.electro.entity.authentication.User;
+import com.electro.dto.general.UploadedImageResponse;
 import com.electro.entity.chat.Message;
 import com.electro.entity.chat.Room;
 import com.electro.mapper.chat.MessageMapper;
@@ -11,7 +12,10 @@ import com.electro.mapper.chat.RoomMapper;
 import com.electro.repository.authentication.UserRepository;
 import com.electro.repository.chat.MessageRepository;
 import com.electro.repository.chat.RoomRepository;
+import com.electro.service.general.ImageService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -39,6 +43,7 @@ public class ClientChatController {
     private RoomMapper roomMapper;
     private MessageRepository messageRepository;
     private MessageMapper messageMapper;
+    private ImageService imageService;
 
     @GetMapping("/get-room")
     public ResponseEntity<ClientRoomExistenceResponse> getRoom(Authentication authentication) {
@@ -52,12 +57,8 @@ public class ClientChatController {
         clientRoomExistenceResponse.setRoomExistence(roomResponse != null);
         clientRoomExistenceResponse.setRoomResponse(roomResponse);
         clientRoomExistenceResponse.setRoomRecentMessages(
-                roomResponse != null
-                        ? messageMapper.entityToResponse(
-                        messageRepository
-                                .findByRoomId(
-                                        roomResponse.getId(),
-                                        PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "id")))
+                roomResponse != null ? messageMapper.entityToResponse(
+                        messageRepository.findByRoomId(roomResponse.getId(), PageRequest.of(0, 20, Sort.by(Sort.Direction.DESC, "id")))
                                 .stream()
                                 .sorted(Comparator.comparing(Message::getId))
                                 .collect(Collectors.toList()))
@@ -80,6 +81,11 @@ public class ClientChatController {
         Room roomAfterSave = roomRepository.save(room);
 
         return ResponseEntity.status(HttpStatus.OK).body(roomMapper.entityToResponse(roomAfterSave));
+    }
+
+    @PostMapping("/upload-image")
+    public ResponseEntity<UploadedImageResponse> uploadImage(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.status(HttpStatus.OK).body(imageService.store(file));
     }
 
 }

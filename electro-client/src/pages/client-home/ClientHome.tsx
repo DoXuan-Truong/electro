@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Stack, useMantineTheme } from '@mantine/core';
+import { AnimatedPage } from 'components';
 import ClientHomeBanner from 'pages/client-home/ClientHomeBanner';
 import ClientHomeFeaturedCategories from 'pages/client-home/ClientHomeFeaturedCategories';
 import ClientHomeLatestProducts from 'pages/client-home/ClientHomeLatestProducts';
@@ -12,16 +13,18 @@ function ClientHome() {
   const theme = useMantineTheme();
 
   return (
-    <main>
-      <Container size="xl">
-        <Stack spacing={theme.spacing.xl * 1.5}>
-          <ClientHomeBanner/>
-          <ClientHomeFeaturedCategories/>
-          <ClientHomeLatestProducts/>
-          <ClientHomeNewsletter/>
-        </Stack>
-      </Container>
-    </main>
+    <AnimatedPage>
+      <main>
+        <Container size="xl">
+          <Stack spacing={theme.spacing.xl * 1.5}>
+            <ClientHomeBanner />
+            <ClientHomeFeaturedCategories />
+            <ClientHomeLatestProducts />
+            <ClientHomeNewsletter />
+          </Stack>
+        </Container>
+      </main>
+    </AnimatedPage>
   );
 }
 

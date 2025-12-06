@@ -20,7 +20,7 @@ function ClientSetting() {
             <Card radius="md" shadow="sm" p="lg">
               <Stack>
                 <Title order={2}>
-                  Thiết đặt
+                  Thiết lập
                 </Title>
 
                 <Group position="apart">

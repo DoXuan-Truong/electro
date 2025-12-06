@@ -13,6 +13,7 @@ import {
   Title,
   Transition
 } from '@mantine/core';
+import { AnimatedPage } from 'components';
 import { Link, useNavigate } from 'react-router-dom';
 import useTitle from 'hooks/use-title';
 import { z } from 'zod';
@@ -146,70 +147,72 @@ function ClientSignin() {
   });
 
   return (
-    <main>
-      <Container size="xl">
-        <Transition mounted={openedAlert} transition="fade" duration={500} timingFunction="ease">
-          {(styles) => (
-            <Alert
-              style={styles}
-              icon={<AlertCircle size={16}/>}
-              title="Bạn đã đăng nhập thành công!"
-              color="teal"
-              radius="md"
-              mb="xl"
-            >
-              Trở về trang chủ trong vòng {counter} giây...
-            </Alert>
-          )}
-        </Transition>
-        <Card className={classes.wrapper} radius="md" shadow="sm" p={0}>
-          <Card className={classes.form} radius={0} p={30}>
-            <Title order={2} align="center" mt="md" mb={50}>
-              Đăng nhập
-            </Title>
-
-            <form onSubmit={handleFormSubmit}>
-              <TextInput
-                required
+    <AnimatedPage>
+      <main>
+        <Container size="xl">
+          <Transition mounted={openedAlert} transition="fade" duration={500} timingFunction="ease">
+            {(styles) => (
+              <Alert
+                style={styles}
+                icon={<AlertCircle size={16} />}
+                title="Bạn đã đăng nhập thành công!"
+                color="teal"
                 radius="md"
-                label="Tên tài khoản"
-                placeholder="Nhập tên tài khoản của bạn"
-                size="md"
-                disabled={!!user}
-                {...form.getInputProps('username')}
-              />
-              <PasswordInput
-                required
-                label="Mật khẩu"
-                radius="md"
-                placeholder="Nhập mật khẩu của bạn"
-                mt="md"
-                size="md"
-                disabled={!!user}
-                {...form.getInputProps('password')}
-              />
-              <Box mt={5}>
-                <Anchor component={Link} to="/forgot" size="sm">Quên mật khẩu?</Anchor>
-              </Box>
-              {/* TODO: Hoàn chỉnh checkbox */}
-              {/*<Checkbox*/}
-              {/*  label="Giữ trạng thái đăng nhập"*/}
-              {/*  mt="xl"*/}
-              {/*  size="md"*/}
-              {/*  disabled={!!user}*/}
-              {/*/>*/}
-              <Button type="submit" fullWidth mt="xl" size="md" disabled={!!user} radius="md">
+                mb="xl"
+              >
+                Trở về trang chủ trong vòng {counter} giây...
+              </Alert>
+            )}
+          </Transition>
+          <Card className={classes.wrapper} radius="md" shadow="sm" p={0}>
+            <Card className={classes.form} radius={0} p={30}>
+              <Title order={2} align="center" mt="md" mb={50}>
                 Đăng nhập
-              </Button>
-            </form>
+              </Title>
 
-            <Text align="center" mt="md">
-              Không có tài khoản? <Anchor component={Link} to="/signup" weight={700}>Đăng ký ngay</Anchor>
-            </Text>
+              <form onSubmit={handleFormSubmit}>
+                <TextInput
+                  required
+                  radius="md"
+                  label="Tên tài khoản"
+                  placeholder="Nhập tên tài khoản của bạn"
+                  size="md"
+                  disabled={!!user}
+                  {...form.getInputProps('username')}
+                />
+                <PasswordInput
+                  required
+                  label="Mật khẩu"
+                  radius="md"
+                  placeholder="Nhập mật khẩu của bạn"
+                  mt="md"
+                  size="md"
+                  disabled={!!user}
+                  {...form.getInputProps('password')}
+                />
+                <Box mt={5}>
+                  <Anchor component={Link} to="/forgot" size="sm">Quên mật khẩu?</Anchor>
+                </Box>
+                {/* TODO: Hoàn chỉnh checkbox */}
+                {/*<Checkbox*/}
+                {/*  label="Giữ trạng thái đăng nhập"*/}
+                {/*  mt="xl"*/}
+                {/*  size="md"*/}
+                {/*  disabled={!!user}*/}
+                {/*/>*/}
+                <Button type="submit" fullWidth mt="xl" size="md" disabled={!!user} radius="md">
+                  Đăng nhập
+                </Button>
+              </form>
+
+              <Text align="center" mt="md">
+                Không có tài khoản? <Anchor component={Link} to="/signup" weight={700}>Đăng ký ngay</Anchor>
+              </Text>
+            </Card>
           </Card>
-        </Card>
-      </Container>
-    </main>
+        </Container>
+      </main>
+    </AnimatedPage>
   );
 }
 

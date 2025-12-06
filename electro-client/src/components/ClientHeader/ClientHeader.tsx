@@ -16,6 +16,7 @@ import {
   useMantineTheme
 } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
+import Typewriter from 'typewriter-effect';
 import { ElectroLogo } from 'components';
 import {
   Alarm,
@@ -124,14 +125,14 @@ function ClientHeader() {
         <Stack spacing={0} ref={refHeaderStack}>
           <Group position="apart" py={theme.spacing.md}>
             <Center component={Link} to="/">
-              <ElectroLogo/>
+              <ElectroLogo />
             </Center>
             <TextInput
               placeholder="Bạn tìm gì..."
               variant="filled"
               size="md"
               radius="md"
-              icon={<Search size={16}/>}
+              icon={<Search size={16} />}
               sx={{ width: 600 }}
               value={search}
               onChange={(event) => setSearch(event.currentTarget.value)}
@@ -143,7 +144,7 @@ function ClientHeader() {
                   <Tooltip label="Giỏ hàng" position="bottom">
                     <UnstyledButton component={Link} to="/cart">
                       <Group spacing="xs" px={theme.spacing.sm} py={theme.spacing.xs} className={classes.iconGroup}>
-                        <ShoppingCart strokeWidth={1}/>
+                        <ShoppingCart strokeWidth={1} />
                         <Text weight={500} size="sm">{currentTotalCartItems}</Text>
                       </Group>
                     </UnstyledButton>
@@ -152,7 +153,7 @@ function ClientHeader() {
                   <Tooltip label="Đơn hàng" position="bottom">
                     <UnstyledButton component={Link} to="/order">
                       <Group spacing="xs" px={theme.spacing.sm} py={theme.spacing.xs} className={classes.iconGroup}>
-                        <FileBarcode strokeWidth={1}/>
+                        <FileBarcode strokeWidth={1} />
                       </Group>
                     </UnstyledButton>
                   </Tooltip>
@@ -163,7 +164,7 @@ function ClientHeader() {
                 <UnstyledButton onClick={handleNotificationButton}>
                   <Indicator size={14} color="pink" withBorder disabled={disabledNotificationIndicator}>
                     <Group spacing="xs" px={theme.spacing.sm} py={theme.spacing.xs} className={classes.iconGroup}>
-                      <Bell strokeWidth={1}/>
+                      <Bell strokeWidth={1} />
                     </Group>
                   </Indicator>
                 </UnstyledButton>
@@ -181,7 +182,7 @@ function ClientHeader() {
                         className={classes.iconGroup}
                         sx={{ color: user ? theme.colors.blue[theme.colorScheme === 'dark' ? 4 : 7] : 'inherit' }}
                       >
-                        <UserCircle strokeWidth={1}/>
+                        <UserCircle strokeWidth={1} />
                       </Group>
                     </UnstyledButton>
                   </Tooltip>
@@ -189,38 +190,38 @@ function ClientHeader() {
               >
                 {user && (
                   <>
-                    <Menu.Item icon={<User size={14}/>} component={Link} to="/user">
+                    <Menu.Item icon={<User size={14} />} component={Link} to="/user">
                       Tài khoản
                     </Menu.Item>
-                    <Menu.Item icon={<Settings size={14}/>} component={Link} to="/user/setting">
-                      Thiết đặt
+                    <Menu.Item icon={<Settings size={14} />} component={Link} to="/user/setting">
+                      Thiết lập
                     </Menu.Item>
-                    <Menu.Item icon={<Star size={14}/>} component={Link} to="/user/review">
+                    <Menu.Item icon={<Star size={14} />} component={Link} to="/user/review">
                       Đánh giá sản phẩm
                     </Menu.Item>
-                    <Menu.Item icon={<Heart size={14}/>} component={Link} to="/user/wishlist">
+                    <Menu.Item icon={<Heart size={14} />} component={Link} to="/user/wishlist">
                       Sản phẩm yêu thích
                     </Menu.Item>
-                    <Menu.Item icon={<Award size={14}/>} component={Link} to="/user/reward">
+                    <Menu.Item icon={<Award size={14} />} component={Link} to="/user/reward">
                       Điểm thưởng
                     </Menu.Item>
-                    <Menu.Item icon={<Alarm size={14}/>} component={Link} to="/user/preorder">
+                    <Menu.Item icon={<Alarm size={14} />} component={Link} to="/user/preorder">
                       Đặt trước sản phẩm
                     </Menu.Item>
-                    <Menu.Item icon={<MessageCircle size={14}/>} component={Link} to="/user/chat">
+                    <Menu.Item icon={<MessageCircle size={14} />} component={Link} to="/user/chat">
                       Yêu cầu tư vấn
                     </Menu.Item>
-                    <Menu.Item color="pink" icon={<Logout size={14}/>} onClick={handleSignoutMenu}>
+                    <Menu.Item color="pink" icon={<Logout size={14} />} onClick={handleSignoutMenu}>
                       Đăng xuất
                     </Menu.Item>
                   </>
                 )}
                 {!user && (
                   <>
-                    <Menu.Item icon={<Login size={14}/>} component={Link} to="/signin">
+                    <Menu.Item icon={<Login size={14} />} component={Link} to="/signin">
                       Đăng nhập
                     </Menu.Item>
-                    <Menu.Item icon={<Fingerprint size={14}/>} component={Link} to="/signup">
+                    <Menu.Item icon={<Fingerprint size={14} />} component={Link} to="/signup">
                       Đăng ký
                     </Menu.Item>
                   </>
@@ -234,7 +235,7 @@ function ClientHeader() {
                 opened={openedCategoryMenu}
                 onClose={() => setOpenedCategoryMenu(false)}
                 target={(
-                  <Button onClick={() => setOpenedCategoryMenu((o) => !o)} leftIcon={<List size={16}/>} radius="md">
+                  <Button onClick={() => setOpenedCategoryMenu((o) => !o)} leftIcon={<List size={16} />} radius="md">
                     Danh mục sản phẩm
                   </Button>
                 )}
@@ -244,21 +245,36 @@ function ClientHeader() {
                 radius="md"
                 shadow="md"
               >
-                <CategoryMenu setOpenedCategoryMenu={setOpenedCategoryMenu}/>
+                <CategoryMenu setOpenedCategoryMenu={setOpenedCategoryMenu} />
               </Popover>
-              <Button variant="subtle" radius="md">
+              <Button variant="subtle" radius="md" component={Link} to="/search?newable=true">
                 Sản phẩm mới
               </Button>
-              <Button variant="subtle" color="green" radius="md">
+              <Button variant="subtle" color="green" radius="md" component={Link} to="/search?saleable=true">
                 Sản phẩm xu hướng
               </Button>
-              <Button variant="subtle" color="pink" radius="md">
+              <Button variant="subtle" color="pink" radius="md" component={Link} to="/search?discounted=true">
                 Khuyến mại
               </Button>
             </Group>
             <Group spacing="xs">
               <Badge color="pink" size="xs" variant="filled">Hot</Badge>
-              <Text size="sm" color="dimmed">Miễn phí giao hàng cho đơn hàng trên 1 triệu đồng</Text>
+              <Text size="sm" color="dimmed" sx={{ minWidth: 300, textAlign: 'right' }}>
+                <Typewriter
+                  options={{
+                    strings: [
+                      'Miễn phí giao hàng cho đơn hàng trên 1 triệu đồng',
+                      'Đổi trả trong vòng 30 ngày',
+                      'Hỗ trợ kỹ thuật 24/7',
+                      'Săn sale giá sốc mỗi ngày',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 30,
+                  }}
+                />
+              </Text>
             </Group>
           </Group>
         </Stack>

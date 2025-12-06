@@ -54,16 +54,16 @@ function ChatDashboard() {
             <Group position="apart">
               <Text size="lg" weight={500}>Khách hàng</Text>
               <ActionIcon variant="light" color="blue" size="sm" onClick={() => refetchRoomResponses()}>
-                <Refresh size={16}/>
+                <Refresh size={16} />
               </ActionIcon>
             </Group>
             <Box sx={{ position: 'relative' }}>
-              <LoadingOverlay visible={isLoadingRoomResponses}/>
+              <LoadingOverlay visible={isLoadingRoomResponses} />
               <ScrollArea sx={{ height: 'calc(100vh - 174px)' }}>
                 <Stack spacing="xs">
                   {roomResponses.content.map((roomResponse, index) => (
                     <UnstyledButton key={roomResponse.id} onClick={() => setActiveRoomId(roomResponse.id)}>
-                      <RoomCard roomResponse={roomResponse} active={roomResponse.id === activeRoomId}/>
+                      <RoomCard roomResponse={roomResponse} active={roomResponse.id === activeRoomId} />
                     </UnstyledButton>
                   ))}
                 </Stack>
@@ -74,7 +74,7 @@ function ChatDashboard() {
       </Grid.Col>
       <Grid.Col xs={8} lg={9} sx={{ height: '100%' }}>
         <Paper shadow="xs" sx={{ height: '100%', overflow: 'hidden' }}>
-          {roomResponses.content.length > 0 && <ChatPanel roomId={activeRoomId}/>}
+          {roomResponses.content.length > 0 && <ChatPanel roomId={activeRoomId} />}
         </Paper>
       </Grid.Col>
     </Grid>
@@ -158,7 +158,7 @@ function ChatPanel({ roomId }: { roomId: number }) {
 
   return (
     <Stack spacing={0} sx={{ position: 'relative', height: '100%' }}>
-      <LoadingOverlay visible={isLoadingMessageResponses}/>
+      <LoadingOverlay visible={isLoadingMessageResponses} />
       <ScrollArea
         viewportRef={viewport}
         sx={{ height: 'calc(100vh - 172px)' }}
@@ -166,14 +166,15 @@ function ChatPanel({ roomId }: { roomId: number }) {
         <Stack spacing={0} sx={{ paddingTop: theme.spacing.md }}>
           {messages.map((message: MessageResponse) => (
             (adminUser && message.user.id === adminUser.id)
-              ? <ToMessage key={message.id} message={message}/>
-              : <FromMessage key={message.id} message={message}/>
+              ? <ToMessage key={message.id} message={message} />
+              : <FromMessage key={message.id} message={message} />
           ))}
         </Stack>
       </ScrollArea>
       <MessageInput
         roomId={roomId}
         userId={adminUser?.id || 0}
+        isAdmin={true}
       />
     </Stack>
   );

@@ -60,17 +60,22 @@ function ClientFooter() {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <footer className={classes.footer}>
+    <footer className={classes.footer} style={{ position: 'relative' }}>
+      <div style={{ position: 'absolute', top: -50, left: 0, width: '100%', overflow: 'hidden', lineHeight: 0 }}>
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none" style={{ position: 'relative', display: 'block', width: 'calc(100% + 1.3px)', height: '50px' }}>
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill={theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0]}></path>
+        </svg>
+      </div>
       <Container size="xl">
         <Grid>
           <Grid.Col md={6}>
             <Stack spacing={theme.spacing.lg * 1.75}>
-              <ElectroLogo width={135}/>
+              <ElectroLogo width={135} />
               <Group>
-                <Headset size={52} color={theme.colors[theme.primaryColor][6]} strokeWidth={1.25}/>
+                <Headset size={52} color={theme.colors[theme.primaryColor][6]} strokeWidth={1.25} />
                 <Stack spacing={theme.spacing.xs / 4}>
                   <Text size="sm" color="dimmed">Tổng đài hỗ trợ</Text>
-                  <Text size="xl">(024) 3535 7272, (028) 35 111 222</Text>
+                  <Text size="xl">(082) 2234 810</Text>
                 </Stack>
               </Group>
               <Stack spacing={theme.spacing.xs / 2}>
@@ -78,18 +83,26 @@ function ClientFooter() {
                 <Text>Số 18 Phố Viên, P.Đức Thắng, Q.Bắc Từ Liêm, TP.Hà Nội</Text>
               </Stack>
               <Group spacing="sm">
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandFacebook strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandYoutube strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandInstagram strokeWidth={1.5}/>
-                </ActionIcon>
-                <ActionIcon color="blue" size="xl" radius="xl" variant="light">
-                  <BrandTiktok strokeWidth={1.5}/>
-                </ActionIcon>
+                <a href="https://www.facebook.com/do.truong.35728" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandFacebook strokeWidth={1.5} />
+                  </ActionIcon>
+                </a>
+                <a href="https://youtube.com/your-channel" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandYoutube strokeWidth={1.5} />
+                  </ActionIcon>
+                </a>
+                <a href="https://instagram.com/your-ig" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandInstagram strokeWidth={1.5} />
+                  </ActionIcon>
+                </a>
+                <a href="https://www.tiktok.com/@kudoushaki" target="_blank" rel="noopener noreferrer">
+                  <ActionIcon color="blue" size="xl" radius="xl" variant="light">
+                    <BrandTiktok strokeWidth={1.5} />
+                  </ActionIcon>
+                </a>
               </Group>
             </Stack>
           </Grid.Col>
@@ -130,7 +143,7 @@ function ClientFooter() {
                           value: 'light',
                           label: (
                             <Center>
-                              <Sun size={14} strokeWidth={1.5}/>
+                              <Sun size={14} strokeWidth={1.5} />
                               <Box ml={10}>Sáng</Box>
                             </Center>
                           ),
@@ -139,7 +152,7 @@ function ClientFooter() {
                           value: 'dark',
                           label: (
                             <Center>
-                              <Moon size={14} strokeWidth={1.5}/>
+                              <Moon size={14} strokeWidth={1.5} />
                               <Box ml={10}>Tối</Box>
                             </Center>
                           ),
@@ -158,16 +171,16 @@ function ClientFooter() {
           </Text>
           <Group spacing="xs">
             <ThemeIcon variant="outline" color="gray" sx={{ width: 50, height: 30 }}>
-              <BrandVisa strokeWidth={1.5}/>
+              <BrandVisa strokeWidth={1.5} />
             </ThemeIcon>
             <ThemeIcon variant="outline" color="gray" sx={{ width: 50, height: 30 }}>
-              <BrandMastercard strokeWidth={1.5}/>
+              <BrandMastercard strokeWidth={1.5} />
             </ThemeIcon>
             <ThemeIcon variant="outline" color="gray" sx={{ width: 50, height: 30 }}>
-              <BuildingBank strokeWidth={1.5}/>
+              <BuildingBank strokeWidth={1.5} />
             </ThemeIcon>
             <ThemeIcon variant="outline" color="gray" sx={{ width: 50, height: 30 }}>
-              <CurrencyDong strokeWidth={1.5}/>
+              <CurrencyDong strokeWidth={1.5} />
             </ThemeIcon>
           </Group>
         </Group>

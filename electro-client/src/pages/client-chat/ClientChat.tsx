@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { AlertTriangle, Photo, Send } from 'tabler-icons-react';
 import {
   ActionIcon,
   Avatar,
@@ -8,6 +9,7 @@ import {
   Container,
   Grid,
   Group,
+  Image,
   LoadingOverlay,
   Overlay,
   ScrollArea,
@@ -19,7 +21,6 @@ import {
 } from '@mantine/core';
 import { ClientUserNavbar } from 'components';
 import useTitle from 'hooks/use-title';
-import { AlertTriangle, Send } from 'tabler-icons-react';
 import { MessageResponse } from 'models/Message';
 import useAuthStore from 'stores/use-auth-store';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
@@ -70,7 +71,7 @@ function ClientChat() {
       <Container size="xl">
         <Grid gutter="lg">
           <Grid.Col md={3}>
-            <ClientUserNavbar/>
+            <ClientUserNavbar />
           </Grid.Col>
 
           <Grid.Col md={9}>
@@ -88,7 +89,7 @@ function ClientChat() {
                     border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
                   }}
                 >
-                  {<LoadingOverlay visible={isLoadingRoomExistenceResponse}/>}
+                  {<LoadingOverlay visible={isLoadingRoomExistenceResponse} />}
                   {(isErrorRoomExistenceResponse || (roomExistenceResponse && !roomExistenceResponse.roomExistence)) && (
                     <>
                       <Box sx={{
@@ -100,7 +101,7 @@ function ClientChat() {
                       }}>
                         {isErrorRoomExistenceResponse && (
                           <Stack my={theme.spacing.xl} sx={{ alignItems: 'center', color: theme.colors.pink[6] }}>
-                            <AlertTriangle size={125} strokeWidth={1}/>
+                            <AlertTriangle size={125} strokeWidth={1} />
                             <Text size="xl" weight={500}>Đã có lỗi xảy ra</Text>
                           </Stack>
                         )}
@@ -127,8 +128,8 @@ function ClientChat() {
                         <Stack spacing={0} sx={{ paddingTop: theme.spacing.md }}>
                           {messages.map((message: MessageResponse) => (
                             message.user.id === user?.id
-                              ? <ToMessage key={message.id} message={message}/>
-                              : <FromMessage key={message.id} message={message}/>
+                              ? <ToMessage key={message.id} message={message} />
+                              : <FromMessage key={message.id} message={message} />
                           ))}
                         </Stack>
                       </ScrollArea>
@@ -174,7 +175,15 @@ export function FromMessage({ message }: { message: MessageResponse }) {
                 : theme.colors.gray[0],
             }}
           >
-            <Text size="sm">{message.content}</Text>
+            {message.image && (
+              <Image
+                radius="md"
+                src={message.image}
+                alt="Sent image"
+                mb={message.content ? 'xs' : 0}
+              />
+            )}
+            {message.content && <Text size="sm">{message.content}</Text>}
           </Card>
           <Text size="xs" color="dimmed">{DateUtils.isoDateToString(message.createdAt)}</Text>
         </Group>
@@ -200,25 +209,35 @@ export function ToMessage({ message }: { message: MessageResponse }) {
             : theme.colors.blue[5],
         }}
       >
-        <Text size="sm" color={theme.white}>{message.content}</Text>
+        {message.image && (
+          <Image
+            radius="md"
+            src={message.image}
+            alt="Sent image"
+            mb={message.content ? 'xs' : 0}
+          />
+        )}
+        {message.content && <Text size="sm" color={theme.white}>{message.content}</Text>}
       </Card>
     </Group>
   );
 }
 
-export function MessageInput({ roomId, userId }: { roomId: number, userId: number }) {
+export function MessageInput({ roomId, userId, isAdmin = false }: { roomId: number, userId: number, isAdmin?: boolean }) {
   const theme = useMantineTheme();
 
   const [message, setMessage] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const stompClient = useStompClient();
 
-  const handleSendMessageButton = () => {
-    if (message.trim() !== '' && stompClient) {
+  const handleSendMessageButton = (imageUrl?: string) => {
+    if ((message.trim() !== '' || imageUrl) && stompClient) {
       stompClient.publish({
         destination: '/chat/send/' + roomId,
         body: JSON.stringify({
           content: message.trim(),
+          image: imageUrl,
           status: 1,
           userId: userId,
           roomId: roomId,
@@ -234,6 +253,19 @@ export function MessageInput({ roomId, userId }: { roomId: number, userId: numbe
     }
   };
 
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      try {
+        const uploadUrl = isAdmin ? ResourceURL.CHAT_UPLOAD_IMAGE : ResourceURL.CLIENT_CHAT_UPLOAD_IMAGE;
+        const response = await FetchUtils.uploadImageWithToken(uploadUrl, file, isAdmin);
+        handleSendMessageButton(response.path);
+      } catch (error) {
+        NotifyUtils.simpleFailed('Tải ảnh lên thất bại');
+      }
+    }
+  };
+
   return (
     <Group spacing="xs" sx={{
       position: 'absolute',
@@ -243,6 +275,13 @@ export function MessageInput({ roomId, userId }: { roomId: number, userId: numbe
       padding: theme.spacing.md,
       borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
     }}>
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: 'none' }}
+        accept="image/*"
+        onChange={handleImageUpload}
+      />
       <TextInput
         placeholder="Nhập tin nhắn"
         variant="filled"
@@ -257,10 +296,20 @@ export function MessageInput({ roomId, userId }: { roomId: number, userId: numbe
         radius="md"
         variant="light"
         size="lg"
-        title="Gửi tin nhắn"
-        onClick={handleSendMessageButton}
+        title="Gửi hình ảnh"
+        onClick={() => fileInputRef.current?.click()}
       >
-        <Send size={18}/>
+        <Photo size={18} />
+      </ActionIcon>
+      <ActionIcon
+        color="blue"
+        radius="md"
+        variant="light"
+        size="lg"
+        title="Gửi tin nhắn"
+        onClick={() => handleSendMessageButton()}
+      >
+        <Send size={18} />
       </ActionIcon>
     </Group>
   );

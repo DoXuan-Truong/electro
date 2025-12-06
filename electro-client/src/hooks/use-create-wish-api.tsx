@@ -18,7 +18,7 @@ function useCreateWishApi() {
             <Anchor component={Link} to="/user/wishlist" inherit>danh sách yêu thích</Anchor>
           </Text>
         ),
-      onError: () => NotifyUtils.simpleFailed('Không thêm được sản phẩm vào danh sách yêu thích'),
+      onError: () => NotifyUtils.simpleFailed('Sản phẩm đã ở trong danh sách yêu thích'),
     }
   );
 }

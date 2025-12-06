@@ -12,6 +12,7 @@ public class MessageResponse {
     private Instant createdAt;
     private Instant updatedAt;
     private String content;
+    private String image;
     private Integer status;
     private UserResponse user;
 
