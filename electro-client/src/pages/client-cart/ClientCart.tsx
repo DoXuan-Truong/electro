@@ -52,6 +52,7 @@ import PageConfigs from 'pages/PageConfigs';
 import { PaymentMethodType } from 'models/PaymentMethod';
 import useClientSiteStore from 'stores/use-client-site-store';
 import { NotificationType } from 'models/Notification';
+import confetti from 'canvas-confetti';
 
 function ClientCart() {
   useTitle();
@@ -86,7 +87,7 @@ function ClientCart() {
         <Stack>
           <Text>Bạn có muốn đặt mua những sản phẩm đã chọn với hình thức thanh toán sau?</Text>
           <Group spacing="xs">
-            <PaymentMethodIcon color={theme.colors.gray[5]}/>
+            <PaymentMethodIcon color={theme.colors.gray[5]} />
             <Text size="sm">{PageConfigs.paymentMethodNameMap[currentPaymentMethod]}</Text>
           </Group>
         </Stack>
@@ -105,7 +106,7 @@ function ClientCart() {
           closeOnClickOutside: false,
           withCloseButton: false,
           title: <strong>Thông báo xác nhận đặt mua</strong>,
-          children: <ConfirmedOrder/>,
+          children: <ConfirmedOrder />,
         }),
     });
   };
@@ -116,7 +117,7 @@ function ClientCart() {
     cartContentFragment = (
       <Stack>
         {Array(5).fill(0).map((_, index) => (
-          <Skeleton key={index} height={50} radius="md"/>
+          <Skeleton key={index} height={50} radius="md" />
         ))}
       </Stack>
     );
@@ -125,7 +126,7 @@ function ClientCart() {
   if (isError) {
     cartContentFragment = (
       <Stack my={theme.spacing.xl} sx={{ alignItems: 'center', color: theme.colors.pink[6] }}>
-        <AlertTriangle size={125} strokeWidth={1}/>
+        <AlertTriangle size={125} strokeWidth={1} />
         <Text size="xl" weight={500}>Đã có lỗi xảy ra</Text>
       </Stack>
     );
@@ -174,12 +175,12 @@ function ClientCart() {
                 </thead>
                 <tbody>
                   {cart.cartItems
-                    .map(cartItem => <CartItemTableRow key={cartItem.cartItemVariant.variantId} cartItem={cartItem}/>)}
+                    .map(cartItem => <CartItemTableRow key={cartItem.cartItemVariant.variantId} cartItem={cartItem} />)}
                   {cart.cartItems.length === 0 && (
                     <tr>
                       <td colSpan={5}>
                         <Stack my={theme.spacing.xl} sx={{ alignItems: 'center', color: theme.colors.blue[6] }}>
-                          <Marquee size={125} strokeWidth={1}/>
+                          <Marquee size={125} strokeWidth={1} />
                           <Text size="xl" weight={500}>Chưa thêm mặt hàng nào</Text>
                         </Stack>
                       </td>
@@ -205,7 +206,7 @@ function ClientCart() {
                   <Text weight={500} size="sm">
                     {user?.fullname}
                     <ThemeIcon size="xs" ml="xs" color="teal" title="Địa chỉ của người dùng đặt mua">
-                      <Home size={12}/>
+                      <Home size={12} />
                     </ThemeIcon>
                   </Text>
                   <Text weight={500} size="sm">{user?.phone}</Text>
@@ -224,7 +225,7 @@ function ClientCart() {
                 <RadioGroup value="ghn" orientation="vertical" size="sm">
                   <Radio
                     value="ghn"
-                    label={<Image src={MiscUtils.ghnLogoPath} styles={{ image: { maxWidth: 170 } }}/>}
+                    label={<Image src={MiscUtils.ghnLogoPath} styles={{ image: { maxWidth: 170 } }} />}
                   />
                 </RadioGroup>
               </Stack>
@@ -248,7 +249,7 @@ function ClientCart() {
                         value={paymentMethod.paymentMethodCode}
                         label={(
                           <Group spacing="xs">
-                            <PaymentMethodIcon size={24}/>
+                            <PaymentMethodIcon size={24} />
                             <Text size="sm">{paymentMethod.paymentMethodName}</Text>
                           </Group>
                         )}
@@ -275,7 +276,7 @@ function ClientCart() {
                       <Text size="sm" weight={500}>Tổng tiền</Text>
                       <Tooltip label="Chưa tính phí vận chuyển" withArrow sx={{ height: 20 }}>
                         <ThemeIcon variant="light" color="blue" size="sm">
-                          <InfoCircle size={14}/>
+                          <InfoCircle size={14} />
                         </ThemeIcon>
                       </Tooltip>
                     </Group>
@@ -289,7 +290,7 @@ function ClientCart() {
 
             <Button
               size="lg"
-              leftIcon={<ShoppingCart/>}
+              leftIcon={<ShoppingCart />}
               onClick={handleOrderButton}
               disabled={cart.cartItems.length === 0}
             >
@@ -306,7 +307,7 @@ function ClientCart() {
       <Container size="xl">
         <Stack spacing="lg">
           <Group spacing="xs">
-            <ShoppingCart/>
+            <ShoppingCart />
             <Title order={2}>Giỏ hàng</Title>
           </Group>
 
@@ -471,7 +472,7 @@ function CartItemTableRow({ cartItem }: { cartItem: ClientCartVariantResponse })
           onClick={handleDeleteCartItemButton}
           sx={{ margin: 'auto' }}
         >
-          <Trash size={16}/>
+          <Trash size={16} />
         </ActionIcon>
       </td>
     </tr>
@@ -526,7 +527,7 @@ function ConfirmedOrder() {
     contentFragment = (
       <Stack justify="space-between" sx={{ height: '100%' }}>
         <Stack align="center" sx={{ alignItems: 'center', color: theme.colors.pink[6] }}>
-          <AlertTriangle size={100} strokeWidth={1}/>
+          <AlertTriangle size={100} strokeWidth={1} />
           <Text weight={500}>Đã có lỗi xảy ra</Text>
         </Stack>
         <Button fullWidth variant="default" onClick={modals.closeAll} mt="md">
@@ -540,7 +541,7 @@ function ConfirmedOrder() {
     contentFragment = (
       <Stack justify="space-between" sx={{ height: '100%' }}>
         <Stack align="center" sx={{ alignItems: 'center', color: theme.colors.teal[6] }}>
-          <Check size={100} strokeWidth={1}/>
+          <Check size={100} strokeWidth={1} />
           <Text>
             <span>Đơn hàng </span>
             <Anchor
@@ -565,7 +566,7 @@ function ConfirmedOrder() {
     contentFragment = (
       <Stack justify="space-between" sx={{ height: '100%' }}>
         <Stack align="center" sx={{ alignItems: 'center', color: theme.colors.teal[6] }}>
-          <Check size={100} strokeWidth={1}/>
+          <Check size={100} strokeWidth={1} />
           <Text sx={{ textAlign: 'center' }}>
             <span>Đơn hàng </span>
             <Text weight={500} component="span">
@@ -591,7 +592,7 @@ function ConfirmedOrder() {
                 fullWidth
                 mt="md"
                 color="teal"
-                leftIcon={<Check/>}
+                leftIcon={<Check />}
                 onClick={modals.closeAll}
               >
                 Đã thanh toán thành công
@@ -604,7 +605,7 @@ function ConfirmedOrder() {
                   mt="md"
                   variant="outline"
                   color="pink"
-                  leftIcon={<X size={16}/>}
+                  leftIcon={<X size={16} />}
                   onClick={modals.closeAll}
                 >
                   Đã hủy thanh toán. Đóng hộp thoại này.
@@ -623,7 +624,7 @@ function ConfirmedOrder() {
 
   return (
     <Stack sx={{ minHeight: isLoading ? 200 : 'unset' }}>
-      <LoadingOverlay visible={isLoading}/>
+      <LoadingOverlay visible={isLoading} />
       {contentFragment}
     </Stack>
   );
@@ -693,6 +694,26 @@ function useCreateClientOrderApi() {
         void queryClient.invalidateQueries(['client-api', 'carts', 'getCart']);
         updateCurrentCartId(null);
         updateCurrentTotalCartItems(0);
+
+        const duration = 5 * 1000;
+        const animationEnd = Date.now() + duration;
+        const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 1000 };
+
+        const randomInRange = (min: number, max: number) => {
+          return Math.random() * (max - min) + min;
+        };
+
+        const interval: any = setInterval(function () {
+          const timeLeft = animationEnd - Date.now();
+
+          if (timeLeft <= 0) {
+            return clearInterval(interval);
+          }
+
+          const particleCount = 50 * (timeLeft / duration);
+          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+          confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+        }, 250);
       },
     }
   );
