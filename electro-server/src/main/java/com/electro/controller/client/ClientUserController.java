@@ -3,12 +3,14 @@ package com.electro.controller.client;
 import com.electro.constant.AppConstants;
 import com.electro.dto.authentication.UserResponse;
 import com.electro.dto.client.ClientEmailSettingUserRequest;
+import com.electro.dto.client.ClientNewsletterRequest;
 import com.electro.dto.client.ClientPasswordSettingUserRequest;
 import com.electro.dto.client.ClientPersonalSettingUserRequest;
 import com.electro.dto.client.ClientPhoneSettingUserRequest;
 import com.electro.entity.authentication.User;
 import com.electro.mapper.authentication.UserMapper;
 import com.electro.repository.authentication.UserRepository;
+import com.electro.service.email.EmailSenderService;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.AllArgsConstructor;
@@ -33,6 +35,7 @@ public class ClientUserController {
     private UserRepository userRepository;
     private UserMapper userMapper;
     private PasswordEncoder passwordEncoder;
+    private EmailSenderService emailSenderService;
 
     @GetMapping("/info")
     public ResponseEntity<UserResponse> getUserInfo(Authentication authentication) {
@@ -98,6 +101,21 @@ public class ClientUserController {
         } else {
             throw new Exception("Wrong old password");
         }
+    }
+
+    @PostMapping("/newsletter")
+    public ResponseEntity<ObjectNode> subscribeNewsletter(Authentication authentication,
+                                                          @RequestBody ClientNewsletterRequest newsletterRequest) {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        // Send newsletter email to the user
+        java.util.Map<String, Object> attributes = new java.util.HashMap<>();
+        attributes.put("userFullname", user.getFullname());
+        emailSenderService.sendNewsletterEmail(user.getEmail(), attributes);
+
+        return ResponseEntity.status(HttpStatus.OK).body(new ObjectNode(JsonNodeFactory.instance));
     }
 
 }
