@@ -62,6 +62,7 @@ import ClientError from 'components/ClientError/ClientError';
 import ProtectedRoute from 'components/ProtectedRoute/ProtectedRoute';
 import ClientUserNavbar from 'components/ClientUserNavbar/ClientUserNavbar';
 import ReviewStarGroup from 'components/ReviewStarGroup/ReviewStarGroup';
+import AnimatedPage from 'components/AnimatedPage/AnimatedPage';
 
 export {
   CreateUpdateTitle,
@@ -118,4 +119,5 @@ export {
   ProtectedRoute,
   ClientUserNavbar,
   ReviewStarGroup,
+  AnimatedPage,
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, createStyles, Grid, Group, Image, Stack, Text, useMantineTheme } from '@mantine/core';
 import { Car, HeartHandshake, Stars } from 'tabler-icons-react';
 import { ClientCarousel } from 'components';
+import { motion } from 'framer-motion';
 
 const useStyles = createStyles((theme) => ({
   rightBanner: {
@@ -24,6 +25,19 @@ const bannerImages = [
   'https://images.unsplash.com/photo-1587202372634-32705e3bf49c?w=1200&h=400&fit=crop',
   'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&h=400&fit=crop',
 ];
+
+const container = {
+  show: {
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, x: 20 },
+  show: { opacity: 1, x: 0 }
+};
 
 function ClientHomeBanner() {
   const theme = useMantineTheme();
@@ -54,29 +68,37 @@ function ClientHomeBanner() {
         </ClientCarousel>
       </Grid.Col>
       <Grid.Col md={5} lg={4}>
-        <Stack>
-          <Group py="sm" px="md" className={classes.rightBanner}>
-            <Car size={65} strokeWidth={1} />
-            <Stack spacing={theme.spacing.xs / 4}>
-              <Text size="md" weight={500}>Miễn phí vận chuyển</Text>
-              <Text size="sm">100% đơn hàng đều được miễn phí vận chuyển khi thanh toán trước.</Text>
-            </Stack>
-          </Group>
-          <Group py="sm" px="md" className={classes.rightBanner}>
-            <Stars size={65} strokeWidth={1} />
-            <Stack spacing={theme.spacing.xs / 4}>
-              <Text size="md" weight={500}>Bảo hành tận tâm</Text>
-              <Text size="sm">Bất kể giấy tờ thế nào, công ty luôn cam kết sẽ hỗ trợ khách hàng tới cùng.</Text>
-            </Stack>
-          </Group>
-          <Group py="sm" px="md" className={classes.rightBanner}>
-            <HeartHandshake size={65} strokeWidth={1} />
-            <Stack spacing={theme.spacing.xs / 4}>
-              <Text size="md" weight={500}>Đổi trả 1-1 hoặc hoàn tiền</Text>
-              <Text size="sm">Nếu phát sinh lỗi hoặc bạn cảm thấy sản phẩm chưa đáp ứng được nhu cầu.</Text>
-            </Stack>
-          </Group>
-        </Stack>
+        <motion.div variants={container} initial="hidden" animate="show">
+          <Stack>
+            <motion.div variants={item}>
+              <Group py="sm" px="md" className={classes.rightBanner}>
+                <Car size={65} strokeWidth={1} />
+                <Stack spacing={theme.spacing.xs / 4}>
+                  <Text size="md" weight={500}>Miễn phí vận chuyển</Text>
+                  <Text size="sm">100% đơn hàng đều được miễn phí vận chuyển khi thanh toán trước.</Text>
+                </Stack>
+              </Group>
+            </motion.div>
+            <motion.div variants={item}>
+              <Group py="sm" px="md" className={classes.rightBanner}>
+                <Stars size={65} strokeWidth={1} />
+                <Stack spacing={theme.spacing.xs / 4}>
+                  <Text size="md" weight={500}>Bảo hành tận tâm</Text>
+                  <Text size="sm">Bất kể giấy tờ thế nào, công ty luôn cam kết sẽ hỗ trợ khách hàng tới cùng.</Text>
+                </Stack>
+              </Group>
+            </motion.div>
+            <motion.div variants={item}>
+              <Group py="sm" px="md" className={classes.rightBanner}>
+                <HeartHandshake size={65} strokeWidth={1} />
+                <Stack spacing={theme.spacing.xs / 4}>
+                  <Text size="md" weight={500}>Đổi trả 1-1 hoặc hoàn tiền</Text>
+                  <Text size="sm">Nếu phát sinh lỗi hoặc bạn cảm thấy sản phẩm chưa đáp ứng được nhu cầu.</Text>
+                </Stack>
+              </Group>
+            </motion.div>
+          </Stack>
+        </motion.div>
       </Grid.Col>
     </Grid>
   );
