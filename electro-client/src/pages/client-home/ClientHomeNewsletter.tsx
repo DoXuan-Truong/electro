@@ -111,13 +111,28 @@ function ClientHomeNewsletter() {
                 color="blue"
                 onClick={handleSubscribe}
                 disabled={subscribeNewsletterApi.isLoading || !email.trim()}
+                sx={{
+                  transition: 'all 0.3s ease',
+                  transform: 'translateY(0)',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+                  
+                  '&:hover:not(:disabled)': {
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)',
+                  },
+                  
+                  '&:active:not(:disabled)': {
+                    transform: 'translateY(0)',
+                    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.15)',
+                  },
+                }}
               >
-                Đăng ký
+                {subscribeNewsletterApi.isLoading ? 'Đang gửi...' : 'Đăng ký'}
               </Button>
             )}
           </Group>
           {emailError && (
-            <Text size="xs" color={theme.white} sx={{ position: 'absolute', top: '100%', left: 0, marginTop: 4 }}>
+            <Text size="xs" color="red" weight={500} sx={{ position: 'absolute', top: '100%', left: 0, marginTop: 4 }}>
               {emailError}
             </Text>
           )}
