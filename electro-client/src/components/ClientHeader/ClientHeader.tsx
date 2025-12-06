@@ -258,15 +258,15 @@ function ClientHeader() {
               </Button>
             </Group>
             <Group spacing="xs">
-              <Badge color="pink" size="xs" variant="filled">Hot</Badge>
+              {/*<Badge color="pink" size="xs" variant="filled">Hot</Badge>*/}
               <Text size="sm" color="dimmed" sx={{ minWidth: 300, textAlign: 'right' }}>
                 <Typewriter
                   options={{
                     strings: [
                       'Miễn phí giao hàng cho đơn hàng trên 1 triệu đồng',
-                      'Đổi trả trong vòng 30 ngày',
-                      'Hỗ trợ kỹ thuật 24/7',
-                      'Săn sale giá sốc mỗi ngày',
+                      'Đổi trả trong vòng 30 ngày, không lo về giá',
+                      'Hỗ trợ kỹ thuật 24/7, tư vấn tận tâm',
+                      'Săn sale giá sốc mỗi ngày, đừng bỏ lỡ!',
                     ],
                     autoStart: true,
                     loop: true,
