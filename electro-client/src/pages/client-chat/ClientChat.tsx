@@ -282,6 +282,15 @@ export function MessageInput({ roomId, userId, isAdmin = false }: { roomId: numb
         accept="image/*"
         onChange={handleImageUpload}
       />
+      <TextInput
+        placeholder="Nhập tin nhắn"
+        variant="filled"
+        radius="md"
+        sx={{ flexGrow: 1 }}
+        value={message}
+        onChange={event => setMessage(event.currentTarget.value)}
+        onKeyDown={handleSendMessageInput}
+      />
       <ActionIcon
         color="blue"
         radius="md"
@@ -292,15 +301,6 @@ export function MessageInput({ roomId, userId, isAdmin = false }: { roomId: numb
       >
         <Photo size={18} />
       </ActionIcon>
-      <TextInput
-        placeholder="Nhập tin nhắn"
-        variant="filled"
-        radius="md"
-        sx={{ flexGrow: 1 }}
-        value={message}
-        onChange={event => setMessage(event.currentTarget.value)}
-        onKeyDown={handleSendMessageInput}
-      />
       <ActionIcon
         color="blue"
         radius="md"
