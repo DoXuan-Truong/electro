@@ -16,6 +16,7 @@ import {
   useMantineTheme
 } from '@mantine/core';
 import React, { useEffect, useRef, useState } from 'react';
+import Typewriter from 'typewriter-effect';
 import { ElectroLogo } from 'components';
 import {
   Alarm,
@@ -258,7 +259,22 @@ function ClientHeader() {
             </Group>
             <Group spacing="xs">
               <Badge color="pink" size="xs" variant="filled">Hot</Badge>
-              <Text size="sm" color="dimmed">Miễn phí giao hàng cho đơn hàng trên 1 triệu đồng</Text>
+              <Text size="sm" color="dimmed" sx={{ minWidth: 300, textAlign: 'right' }}>
+                <Typewriter
+                  options={{
+                    strings: [
+                      'Miễn phí giao hàng cho đơn hàng trên 1 triệu đồng',
+                      'Đổi trả trong vòng 30 ngày',
+                      'Hỗ trợ kỹ thuật 24/7',
+                      'Săn sale giá sốc mỗi ngày',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 30,
+                  }}
+                />
+              </Text>
             </Group>
           </Group>
         </Stack>
