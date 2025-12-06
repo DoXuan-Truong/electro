@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, Grid, Group, Skeleton, Stack, Text, Title, useMantineTheme } from '@mantine/core';
 import { AlertTriangle, List, Marquee } from 'tabler-icons-react';
-import { ClientProductCard } from 'components';
+import { ClientProductCard, ScrollReveal } from 'components';
+import { motion } from 'framer-motion';
 import { useQuery } from 'react-query';
 import FetchUtils, { ErrorMessage, ListResponse } from 'utils/FetchUtils';
 import { ClientListedProductResponse } from 'types';
@@ -34,7 +35,7 @@ function ClientHomeLatestProducts() {
     resultFragment = (
       <Stack>
         {Array(5).fill(0).map((_, index) => (
-          <Skeleton key={index} height={50} radius="md"/>
+          <Skeleton key={index} height={50} radius="md" />
         ))}
       </Stack>
     );
@@ -43,7 +44,7 @@ function ClientHomeLatestProducts() {
   if (isErrorProductResponses) {
     resultFragment = (
       <Stack my={theme.spacing.xl} sx={{ alignItems: 'center', color: theme.colors.pink[6] }}>
-        <AlertTriangle size={125} strokeWidth={1}/>
+        <AlertTriangle size={125} strokeWidth={1} />
         <Text size="xl" weight={500}>Đã có lỗi xảy ra</Text>
       </Stack>
     );
@@ -52,7 +53,7 @@ function ClientHomeLatestProducts() {
   if (products && products.totalElements === 0) {
     resultFragment = (
       <Stack my={theme.spacing.xl} sx={{ alignItems: 'center', color: theme.colors.blue[6] }}>
-        <Marquee size={125} strokeWidth={1}/>
+        <Marquee size={125} strokeWidth={1} />
         <Text size="xl" weight={500}>Không có sản phẩm</Text>
       </Stack>
     );
@@ -60,13 +61,22 @@ function ClientHomeLatestProducts() {
 
   if (products && products.totalElements > 0) {
     resultFragment = (
-      <Grid>
-        {products.content.map((product, index) => (
-          <Grid.Col key={index} span={6} sm={4} md={3}>
-            <ClientProductCard product={product}/>
-          </Grid.Col>
-        ))}
-      </Grid>
+      <ScrollReveal>
+        <Grid>
+          {products.content.map((product, index) => (
+            <Grid.Col key={index} span={6} sm={4} md={3}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <ClientProductCard product={product} />
+              </motion.div>
+            </Grid.Col>
+          ))}
+        </Grid>
+      </ScrollReveal>
     );
   }
 
@@ -78,7 +88,7 @@ function ClientHomeLatestProducts() {
             Sản phẩm mới nhất
           </Text>
         </Title>
-        <Button variant="light" leftIcon={<List size={16}/>} radius="md">
+        <Button variant="light" leftIcon={<List size={16} />} radius="md">
           Xem tất cả
         </Button>
       </Group>
