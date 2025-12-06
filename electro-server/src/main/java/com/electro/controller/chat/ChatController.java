@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.electro.dto.general.UploadedImageResponse;
+import com.electro.service.general.ImageService;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -27,6 +31,7 @@ public class ChatController {
 
     private SimpMessagingTemplate simpMessagingTemplate;
     private MessageService messageService;
+    private ImageService imageService;
 
     @MessageMapping("/{roomId}")
     public void sendMessage(@DestinationVariable String roomId, @Payload MessageRequest message) {
@@ -41,10 +46,14 @@ public class ChatController {
             @RequestParam(name = "sort", defaultValue = AppConstants.DEFAULT_SORT) String sort,
             @RequestParam(name = "filter", required = false) @Nullable String filter,
             @RequestParam(name = "search", required = false) @Nullable String search,
-            @RequestParam(name = "all", required = false) boolean all
-    ) {
+            @RequestParam(name = "all", required = false) boolean all) {
         ListResponse<MessageResponse> messageResponses = messageService.findAll(page, size, sort, filter, search, all);
         return ResponseEntity.status(HttpStatus.OK).body(messageResponses);
+    }
+
+    @PostMapping("/chat/upload-image")
+    public ResponseEntity<UploadedImageResponse> uploadImage(@RequestParam("file") MultipartFile file) {
+        return ResponseEntity.status(HttpStatus.OK).body(imageService.store(file));
     }
 
 }

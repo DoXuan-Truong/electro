@@ -67,6 +67,7 @@ class ResourceURL {
 
   static ROOM = apiPath + '/rooms';
   static MESSAGE = apiPath + '/messages';
+  static CHAT_UPLOAD_IMAGE = apiPath + '/chat/upload-image';
 
   static STATISTIC = apiPath + '/stats';
 
@@ -94,6 +95,7 @@ class ResourceURL {
   static CLIENT_CHAT = clientApiPath + '/chat';
   static CLIENT_CHAT_GET_ROOM = ResourceURL.CLIENT_CHAT + '/get-room';
   static CLIENT_CHAT_CREATE_ROOM = ResourceURL.CLIENT_CHAT + '/create-room';
+  static CLIENT_CHAT_UPLOAD_IMAGE = ResourceURL.CLIENT_CHAT + '/upload-image';
   static CLIENT_REWARD = clientApiPath + '/rewards';
 
   // AUTHENTICATION

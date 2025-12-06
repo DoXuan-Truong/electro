@@ -1158,6 +1158,7 @@ CREATE TABLE message
     created_by BIGINT                NULL,
     updated_by BIGINT                NULL,
     content    VARCHAR(255)          NOT NULL,
+    image      VARCHAR(255)          NULL,
     status     TINYINT               NOT NULL,
     user_id    BIGINT                NOT NULL,
     room_id    BIGINT                NOT NULL,

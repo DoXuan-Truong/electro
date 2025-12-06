@@ -29,6 +29,9 @@ public class Message extends BaseEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "image")
+    private String image;
+
     @Column(name = "status", nullable = false, columnDefinition = "TINYINT")
     private Integer status;
 

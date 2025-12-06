@@ -7,6 +7,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class MessageRequest {
     private String content;
+    private String image;
     private Integer status;
     private Long userId;
     private Long roomId;

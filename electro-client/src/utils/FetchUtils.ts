@@ -163,6 +163,42 @@ class FetchUtils {
   }
 
   /**
+   * Hàm uploadImageWithToken
+   * @param resourceUrl
+   * @param image
+   * @param isAdmin
+   */
+  static async uploadImageWithToken(resourceUrl: string, image: File, isAdmin?: boolean): Promise<UploadedImageResponse> {
+    const storeName = isAdmin ? 'electro-admin-auth-store' : 'electro-auth-store';
+    const authStore = JSON.parse(localStorage.getItem(storeName) || '{}');
+    const token = authStore.state?.jwtToken;
+
+    const formData = new FormData();
+    formData.append('file', image);
+
+    const response = await fetch(resourceUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    // If 401 Unauthorized, try to refresh token
+    if (response.status === 401) {
+      const refreshed = await FetchUtils.refreshToken(isAdmin);
+      if (refreshed) {
+        return FetchUtils.uploadImageWithToken(resourceUrl, image, isAdmin);
+      }
+    }
+
+    if (!response.ok) {
+      throw await response.json();
+    }
+    return await response.json();
+  }
+
+  /**
    * Hàm putWithToken
    * @param resourceUrl
    * @param requestBody
