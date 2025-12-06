@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Tilt from 'react-parallax-tilt';
 import confetti from 'canvas-confetti';
-import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';
 import {
   ActionIcon,
@@ -121,7 +120,9 @@ function ClientProductCard({ product, search }: ClientProductCardProps) {
       style={{ height: '100%' }}
     >
       <motion.div
-        whileHover={{ scale: 1.02 }}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '0px 0px -100px 0px' }}
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         style={{ height: '100%' }}
       >
@@ -216,13 +217,7 @@ function ClientProductCard({ product, search }: ClientProductCardProps) {
                   .map((price, index) => (
                     <span key={index}>
                       {index > 0 && '–'}
-                      <CountUp
-                        end={price}
-                        separator="."
-                        duration={1.5}
-                        suffix="₫"
-                        preserveValue
-                      />
+                      {MiscUtils.formatPrice(price)}₫
                     </span>
                   ))}
               </Text>
