@@ -68,7 +68,7 @@ function ClientHomeNewsletter() {
     >
       <Group position="apart">
         <Group>
-          <Mailbox size={40} strokeWidth={1}/>
+          <Mailbox size={40} strokeWidth={1} />
           <Text weight={500} sx={{ fontSize: theme.fontSizes.xl }}>
             Đăng ký nhận tin
           </Text>
@@ -98,7 +98,7 @@ function ClientHomeNewsletter() {
               placeholder="Địa chỉ email"
               radius="md"
               size="md"
-              icon={<At size={16}/>}
+              icon={<At size={16} />}
               value={email}
               onChange={handleEmailChange}
               disabled={!user}

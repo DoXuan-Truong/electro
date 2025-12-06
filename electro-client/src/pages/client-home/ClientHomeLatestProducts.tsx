@@ -8,6 +8,7 @@ import FetchUtils, { ErrorMessage, ListResponse } from 'utils/FetchUtils';
 import { ClientListedProductResponse } from 'types';
 import ResourceURL from 'constants/ResourceURL';
 import NotifyUtils from 'utils/NotifyUtils';
+import { Link } from 'react-router-dom';
 
 function ClientHomeLatestProducts() {
   const theme = useMantineTheme();
@@ -88,7 +89,7 @@ function ClientHomeLatestProducts() {
             Sản phẩm mới nhất
           </Text>
         </Title>
-        <Button variant="light" leftIcon={<List size={16} />} radius="md">
+        <Button component={Link} to="/search?newable=true&saleable=false" variant="light" leftIcon={<List size={16} />} radius="md">
           Xem tất cả
         </Button>
       </Group>
