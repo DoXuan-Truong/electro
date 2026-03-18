@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
 import java.time.Instant;
+import com.electro.exception.ExpiredTokenException;
 
 @RestControllerAdvice
 public class ApplicationExceptionHandler {
@@ -25,7 +26,7 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler({AuthenticationException.class, VerificationException.class, ExpiredTokenException.class})
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-    public ErrorMessage authenticationException(AuthenticationException ex, WebRequest request) {
+    public ErrorMessage authenticationException(Exception ex, WebRequest request) {
         return new ErrorMessage(
                 HttpStatus.UNAUTHORIZED.value(),
                 Instant.now(),

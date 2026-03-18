@@ -8,4 +8,6 @@ public interface EmailSenderService {
 
     void sendForgetPasswordToken(String toEmail, Map<String, Object> attributes);
 
+    void sendNewsletterEmail(String toEmail, Map<String, Object> attributes);
+
 }

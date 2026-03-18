@@ -32,6 +32,12 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         sendEmail(toEmail, "[Electro Shop] Yêu cầu cấp lại mật khẩu", text);
     }
 
+    @Override
+    public void sendNewsletterEmail(String toEmail, Map<String, Object> attributes) {
+        String text = getEmailContent("newsletter-subscription.ftlh", attributes);
+        sendEmail(toEmail, "[Electro Shop] Đăng ký nhận tin thành công", text);
+    }
+
     private String getEmailContent(String template, Map<String, Object> model) {
         try {
             StringWriter stringWriter = new StringWriter();
