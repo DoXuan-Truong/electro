@@ -4,7 +4,7 @@
 > 2. Mở termimal và chạy lệnh: **git clone https://github.com/DoXuan-Truong/electro.git**
 > 3. Đi vào thư mục dự án: `cd electro`
 > 4. Khởi động tất cả bằng script: **`sh start-project.sh`** hoặc **`./start-project.sh`**
-> 5. Lần đầu tiên sẽ build hơi lâu, ae đợi khi nào có dòng chữ **`DỰ ÁN ĐÃ KHỞI ĐỘNG THÀNH CÔNG`**
+> 5. Lần đầu tiên sẽ build hơi lâu, đợi khi nào có dòng chữ **`DỰ ÁN ĐÃ KHỞI ĐỘNG THÀNH CÔNG`**
 > 6. Mở trình duyệt và truy cập http://localhost:3000/admin để vào trang quản trị (Demo: `user`: `doxuantruong`, `pass`: `123456789`)
 
 # Thiết kế hệ thống
