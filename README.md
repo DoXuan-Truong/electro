@@ -1,7 +1,7 @@
 # Chạy project
 > Chạy project rất rất đơn giản, làm theo các bước sau:
 > 1. Cài đặt Docker Desktop và mở nó lên
-> 2. Mở termimal và chạy lệnh: **git clone https://github.com/hoangtien2k3/electro.git**
+> 2. Mở termimal và chạy lệnh: **git clone https://github.com/DoXuan-Truong/electro.git**
 > 3. Đi vào thư mục dự án: `cd electro`
 > 4. Khởi động tất cả bằng script: **`sh start-project.sh`** hoặc **`./start-project.sh`**
 > 5. Lần đầu tiên sẽ build hơi lâu, ae đợi khi nào có dòng chữ **`DỰ ÁN ĐÃ KHỞI ĐỘNG THÀNH CÔNG`**
